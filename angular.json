@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "appOne"
+    }
+  },
+  "defaultProject": "appOne",
+  "cli": {
+    "analytics": false
+  }
 }
