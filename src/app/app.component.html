@@ -1,18 +1,20 @@
+<app-nav-bar></app-nav-bar>
 <div *ngIf="showTitle">{{ title }}</div>
-
-<div>{{ product.productName }}</div>
 <hr />
-<table>
+
+<!-- <input type="text" (onchange)="updateTitle($event)" /> -->
+<input type="text" [(ngModel)]="title" />
+
+<hr />
+<table border="1">
     <tr>
-        <th>Id</th>
+        <!-- <th>Id</th> -->
         <th>Name</th>
         <th>Brand</th>
     </tr>
-    <div *ngFor="let prod of products">
-        <tr>
-            <td>{{prod.id}}</td>
-            <td>{{prod.productName}}</td>
-            <td>{{prod.brand}}</td>
-        </tr>
-    </div>
+    <tr [id]="prod.id" (click)="handleClick($event, prod)" *ngFor="let prod of products">
+        <!-- <td>{{prod.id}}</td> -->
+        <td (mouseOver)="handleMouseOver(prod.productName)">{{prod.productName}}</td>
+        <td>{{prod.brand}}</td>
+    </tr>
 </table>
