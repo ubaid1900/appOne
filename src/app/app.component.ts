@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { stringify } from 'querystring';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,12 @@ export class AppComponent {
   }
 
   updateTitle(inp: any) {
-    console.log(inp);
-
+    this.title = inp;
+  }
+  updateTitleViaAButton(inp: string) {
+    this.title = inp;
+  }
+  updateTitleViaFormSubmit(inp: string) {
+    this.title = inp;
   }
 }
