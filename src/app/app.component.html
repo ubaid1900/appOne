@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<h2 *ngIf="showTitle">{{ title }}</h2>
+<!-- <h2 *ngIf="showTitle">{{ title }}</h2>
 <hr />
 
 <input type="text" (change)="updateTitle($event.target.value)" [value]="title" />
@@ -13,18 +13,5 @@
     <input #inpTitleForm type="text" [value]="title" />
     <input type="submit" value="update title via form" />
 </form>
-<hr/>
-
-<hr />
-<table border="1">
-    <tr>
-        <!-- <th>Id</th> -->
-        <th>Name</th>
-        <th>Brand</th>
-    </tr>
-    <tr [id]="prod.id" (click)="handleClick($event, prod)" *ngFor="let prod of products">
-        <!-- <td>{{prod.id}}</td> -->
-        <td>{{prod.productName}}</td>
-        <td>{{prod.brand}}</td>
-    </tr>
-</table>
+<hr/> -->
+<router-outlet></router-outlet>

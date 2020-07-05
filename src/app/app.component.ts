@@ -10,10 +10,6 @@ export class AppComponent {
   title = 'App One';
   showTitle = true;
 
-  products = [
-    { id: 1, productName: 'Laptop', brand: 'Lenovo' },
-    { id: 2, productName: 'Laptop', brand: 'Dell' }];
-
   handleClick(evt: any, prod: any) {
     console.log(prod);
   }
