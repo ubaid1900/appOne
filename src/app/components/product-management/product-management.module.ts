@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ProductsComponent } from '../productManagement/products/products.component';
 import { RouterModule } from '@angular/router';
+import { ProductComponent } from './product/product.component';
+import { ProductsComponent } from './products/products.component';
 
 
 
 @NgModule({
-  declarations: [ProductsComponent],
+  declarations: [ProductsComponent, ProductComponent],
   imports: [
     CommonModule,
     RouterModule.forChild([{path: '', component: ProductsComponent},
     {path: 'products', component: ProductsComponent}])
   ],
+  providers: [],
   exports: [ProductsComponent]
 })
 export class ProductManagementModule { }
