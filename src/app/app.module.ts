@@ -1,4 +1,4 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -17,6 +17,7 @@ import { HomeComponent } from './components/home/home.component';
   imports: [
     RouterModule.forRoot([
       { path: '', component: HomeComponent },
+      { path: 'home', component: HomeComponent },
       // { path: 'products', component: ProductsComponent }]),
       // { path: 'products', loadChildren:'./components/product-management/product-management.module#ProductManagementModule' }]),
       { path: 'products', loadChildren: () => import('./components/product-management/product-management.module').then(m=> m.ProductManagementModule)}]),
@@ -25,7 +26,7 @@ import { HomeComponent } from './components/home/home.component';
     // ,
     // ProductManagementModule
   ],
-  providers: [],
+  providers: [Title],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

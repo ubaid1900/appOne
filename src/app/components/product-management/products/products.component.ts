@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { Title } from '@angular/platform-browser';
+import { ProductService } from '../services/product.service';
 
 @Component({
   selector: 'app-products',
@@ -8,23 +10,12 @@ import { Product } from 'src/app/models/product';
 })
 export class ProductsComponent implements OnInit {
   products: Product[] = [];
-  constructor() { }
+
+  constructor(private titleService: Title, private productService: ProductService) { }
 
   ngOnInit(): void {
-    const p1 = new Product();
-    p1.id = 1;
-    p1.name = 'Laptop';
-    p1.brand = 'Lenovo';
-    this.products.push(p1);
-
-    const p2 = new Product();
-    p2.id = 2;
-    p2.name = 'Laptop';
-    p2.name = 'Laptop';
-    p2.brand = 'Dell';
-    p2.likeCount = 1;
-    this.products.push(p2);
-
+    this.titleService.setTitle('Products');
+    this.products = this.productService.getProducts();
     this.products = this.products.sort((a, b) => b.likeCount - a.likeCount);
   }
   handleLikeCountChanged() {

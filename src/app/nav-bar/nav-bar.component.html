@@ -1,1 +1,6 @@
-<p>nav-bar works!</p>
+<div style="background-color: beige; padding: 50px;">
+    <a routerLink="home" routerLinkActive="linkActive">Home</a> &nbsp;
+    <a routerLink="products" routerLinkActive="linkActive">Products</a>
+    <a *ngIf="!isLoggedIn" style="position: relative; float: right;" href="login">Login</a>
+    <span *ngIf="isLoggedIn" style="position: relative; float: right;">Welcome {{currentUser.username}}!</span>
+</div>
