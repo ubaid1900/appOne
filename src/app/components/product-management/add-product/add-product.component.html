@@ -1,24 +1,17 @@
-<form #productForm="ngForm" onsubmit="SubmitTheForm()">
+<form #productForm="ngForm" (submit)="submitTheForm()">
     <label for="productName">Name</label>
-    <input autocomplete="off" #productName="ngModel"  type="text" name="productName" id="productName" required minlength="3" maxlength="10" 
-    [(ngModel)]="product.name">
+    <input autocomplete="off" #productName="ngModel" type="text" name="productName" id="productName" required
+        minlength="3" maxlength="10" [(ngModel)]="product.name">
+    <span style="color:red;" [hidden]="productName.pristine || productName.valid">product name is invalid</span>
     <br>
-    
-productName.pristine:{{productName.pristine}}<br>
-productName.touched: {{productName.touched}}<br>
-productName.dirty: {{productName.dirty}}<br>
-productName.valid: {{productName.valid}}<br>
-productName.invalid: {{productName.invalid}}<br>
 
     <label for="productBrand">Brand</label>
     <input autocomplete="off" type="text" name="productBrand" id="productBrand" minlength="3" maxlength="10"
-    [(ngModel)]="product.brand">
+        [(ngModel)]="product.brand" #productBrand="ngModel">
+    <span style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product name is invalid</span>
     <br>
     <br>
     <input type="submit" [disabled]="productForm.invalid" value="Submit" />
 </form>
-productForm.pristine:{{productForm.pristine}}<br>
-productForm.touched: {{productForm.touched}}<br>
-productForm.dirty: {{productForm.dirty}}<br>
-productForm.valid: {{productForm.valid}}<br>
-productForm.invalid: {{productForm.invalid}}<br>
+
+{{message}}

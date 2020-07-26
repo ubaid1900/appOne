@@ -12,6 +12,12 @@ export class ProductService {
 
   constructor(private httpClient: HttpClient) { }
 
+  addProduct(product: Product) {
+    const newid = this.products.sort((a, b) => b.id - a.id)[0] + 1;
+    product.id = newid;
+    this.products.push(product);
+  }
+  
   getProducts(): Observable<Product[]> {
     if (this.products.length > 0) {
       return of(this.products);
