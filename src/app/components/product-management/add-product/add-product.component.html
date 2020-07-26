@@ -1,0 +1,24 @@
+<form #productForm="ngForm" onsubmit="SubmitTheForm()">
+    <label for="productName">Name</label>
+    <input autocomplete="off" #productName="ngModel"  type="text" name="productName" id="productName" required minlength="3" maxlength="10" 
+    [(ngModel)]="product.name">
+    <br>
+    
+productName.pristine:{{productName.pristine}}<br>
+productName.touched: {{productName.touched}}<br>
+productName.dirty: {{productName.dirty}}<br>
+productName.valid: {{productName.valid}}<br>
+productName.invalid: {{productName.invalid}}<br>
+
+    <label for="productBrand">Brand</label>
+    <input autocomplete="off" type="text" name="productBrand" id="productBrand" minlength="3" maxlength="10"
+    [(ngModel)]="product.brand">
+    <br>
+    <br>
+    <input type="submit" [disabled]="productForm.invalid" value="Submit" />
+</form>
+productForm.pristine:{{productForm.pristine}}<br>
+productForm.touched: {{productForm.touched}}<br>
+productForm.dirty: {{productForm.dirty}}<br>
+productForm.valid: {{productForm.valid}}<br>
+productForm.invalid: {{productForm.invalid}}<br>

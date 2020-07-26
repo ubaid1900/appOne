@@ -1,16 +1,21 @@
 import { Injectable } from '@angular/core';
 import { Product } from 'src/app/models/product';
 import { HttpClient } from '@angular/common/http';
+import { ProductManagementModule } from '../product-management.module';
+import { of, Observable } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: ProductManagementModule
 })
 export class ProductService {
   products = [];
 
   constructor(private httpClient: HttpClient) { }
 
-  getProducts(): Product[] {
+  getProducts(): Observable<Product[]> {
+    if (this.products.length > 0) {
+      return of(this.products);
+    }
     const p1 = new Product();
     p1.id = 1;
     p1.name = 'Laptop';
@@ -25,13 +30,13 @@ export class ProductService {
     p2.likeCount = 1;
     this.products.push(p2);
 
-    return this.products;
+    return of(this.products);
   }
-  getProduct(id: number): Product {
+  getProduct(id: number): Observable<Product> {
     if (this.products) {
-      return this.products.find(f=> f.id === id);
+      return of(this.products.find(f => f.id === id));
     } else {
-      return null;
+      return of(null);
     }
   }
 }

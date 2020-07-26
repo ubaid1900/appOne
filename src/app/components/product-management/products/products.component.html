@@ -1,1 +1,6 @@
 <app-product *ngFor="let prod of products" [product]="prod" (likeCountChanged)="handleLikeCountChanged()"></app-product>
+<!-- 
+<app-product *ngFor="let prod of products$ | async" [product]="prod" (likeCountChanged)="handleLikeCountChanged()">
+</app-product> -->
+
+<a routerLink="add">Add product</a>
