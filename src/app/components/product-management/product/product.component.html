@@ -1,5 +1,7 @@
 <!-- <td>{{product.id}}</td> -->
 <div>{{product.name}}</div>
-<div>{{product.brand}} </div>
+<div>{{product.brand?.name}} </div>
+<div>{{product.fragile}} </div>
 <div (click)="handleLikeClicked()">{{product.likeCount}}<span>&nbsp;&nbsp;click to like</span></div>
+<a href='products/edit/{{product.id}}' >Edit</a>
 <hr/>

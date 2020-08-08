@@ -1,15 +1,17 @@
-<form #productForm="ngForm" (submit)="submitTheForm()">
+<form #productForm="ngForm" (ngSubmit)="submitTheForm()">
     <label for="productName">Name</label>
     <input autocomplete="off" #productName="ngModel" type="text" name="productName" id="productName" required
         minlength="3" maxlength="10" [(ngModel)]="product.name">
     <span style="color:red;" [hidden]="productName.pristine || productName.valid">product name is invalid</span>
     <br>
-
-    <label for="productBrand">Brand</label>
-    <input autocomplete="off" type="text" name="productBrand" id="productBrand" minlength="3" maxlength="10"
-        [(ngModel)]="product.brand" #productBrand="ngModel">
+    <label for="brandDD">Brand</label>
+    <select name="productBrandDD" id="productBrandDD" [(ngModel)]="product.brand" #productBrand="ngModel" required>
+        <option *ngFor="let brand of brands$ | async">{{brand.name}}</option>
+    </select>
     <span style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product name is invalid</span>
     <br>
+    <label for="productFragile">Fragile</label>
+    <input type="checkbox" name="productFragile" id="productFragile" [(ngModel)]="product.fragile" #productFragile="ngModel" />
     <br>
     <input type="submit" [disabled]="productForm.invalid" value="Submit" />
 </form>

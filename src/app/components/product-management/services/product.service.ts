@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Product } from 'src/app/models/product';
+import { Product, Brand } from 'src/app/models/product';
 import { HttpClient } from '@angular/common/http';
 import { ProductManagementModule } from '../product-management.module';
 import { of, Observable } from 'rxjs';
@@ -9,6 +9,7 @@ import { of, Observable } from 'rxjs';
 })
 export class ProductService {
   products = [];
+  brands = [];
 
   constructor(private httpClient: HttpClient) { }
 
@@ -22,17 +23,18 @@ export class ProductService {
     if (this.products.length > 0) {
       return of(this.products);
     }
+    let brands = [];
+    this.getBrands().subscribe(data => brands = data, err => console.error(err), () => {});
     const p1 = new Product();
     p1.id = 1;
     p1.name = 'Laptop';
-    p1.brand = 'Lenovo';
+    p1.brand = brands.find(b => b.name === 'Lenovo');
     this.products.push(p1);
 
     const p2 = new Product();
     p2.id = 2;
     p2.name = 'Laptop';
-    p2.name = 'Laptop';
-    p2.brand = 'Dell';
+    p2.brand = brands.find(b => b.name === 'Dell');
     p2.likeCount = 1;
     this.products.push(p2);
 
@@ -44,5 +46,27 @@ export class ProductService {
     } else {
       return of(null);
     }
+  }
+
+  getBrands(): Observable<Brand[]> {
+    if (this.brands.length > 0) {
+      return of(this.brands);
+    }
+    const p1 = new Brand();
+    p1.id = 1;
+    p1.name = 'Lenovo';
+    this.brands.push(p1);
+
+    const p2 = new Brand();
+    p2.id = 2;
+    p2.name = 'Dell';
+    this.brands.push(p2);
+
+    const p3 = new Brand();
+    p3.id = 3;
+    p3.name = 'Apple';
+    this.brands.push(p3);
+
+    return of(this.brands);
   }
 }
