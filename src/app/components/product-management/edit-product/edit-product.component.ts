@@ -11,13 +11,16 @@ import { Observable } from 'rxjs';
 })
 export class EditProductComponent implements OnInit {
 
-  id: number;
-  product$: Observable<Product>;
+  // id: number;
+  // product$: Observable<Product>;
+  product: Product;
   constructor(private route: ActivatedRoute, private productService: ProductService) { }
 
   ngOnInit(): void {
-    this.id = this.route.snapshot.params['id'];
-    this.product$ = this.productService.getProduct(this.id);
+    // this.id = this.route.snapshot.params['id'];
+    // this.product$ = this.productService.getProduct(this.id);
+
+    this.product = this.route.snapshot.data['retrievedProduct'];
   }
 
 }
