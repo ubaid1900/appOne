@@ -33,5 +33,7 @@ export class AddProductComponent implements OnInit, ICanDeactivate {
   submitTheForm() {
     this.productService.addProduct(this.product);
     this.message = "The product was added.";
+
+    
   }
 }

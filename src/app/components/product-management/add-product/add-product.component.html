@@ -8,7 +8,7 @@
     <select name="productBrandDD" id="productBrandDD" [(ngModel)]="product.brand" #productBrand="ngModel" required>
         <option *ngFor="let brand of brands$ | async">{{brand.name}}</option>
     </select>
-    <span style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product name is invalid</span>
+    <span style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product brand is invalid</span>
     <br>
     <label for="productFragile">Fragile</label>
     <input type="checkbox" name="productFragile" id="productFragile" [(ngModel)]="product.fragile" #productFragile="ngModel" />

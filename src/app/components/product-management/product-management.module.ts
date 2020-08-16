@@ -6,7 +6,7 @@ import { ProductComponent } from './product/product.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductService } from './services/product.service';
 import { AddProductComponent } from './add-product/add-product.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { EditProductComponent } from './edit-product/edit-product.component';
 import { AuthenticationGuard } from 'src/app/shared/auth.guard';
 import { AuthorizationGuardGuard } from 'src/app/shared/authorization-guard.guard';
@@ -21,6 +21,7 @@ import { GetProductResolver } from './GetProductResolver';
     CommonModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     RouterModule.forChild([{ path: '', component: ProductsComponent },
     { path: 'products', component: ProductsComponent },
     {

@@ -1,1 +1,18 @@
-<p>edit-product works!</p>
+<form [formGroup]="productFormGroup" (ngSubmit)="submitTheForm()">
+    <label for="productName">Name</label>
+    <input autocomplete="off" type="text" id="productName"
+        minlength="3" maxlength="10" formControlName="nameControl" >
+    <span style="color:red;">product name is invalid</span>
+    <br>
+    <label for="brandDD">Brand</label>
+    <select id="productBrandDD" formControlName="brandControl">
+        <option *ngFor="let brand of brands$ | async">{{brand.name}}</option>
+    </select>
+    <span style="color:red;">product name is invalid</span>
+    <br>
+    <label for="productFragile">Fragile</label>
+    <input type="checkbox" id="productFragile" formControlName="fragileControl" />
+    <br>
+    <input type="submit" value="Submit" disabled="productFormGroup.invalid"  />
+    {{productFormGroup.get('nameControl').errors}}
+</form>

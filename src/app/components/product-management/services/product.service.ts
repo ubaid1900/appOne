@@ -27,13 +27,13 @@ export class ProductService {
     this.getBrands().subscribe(data => brands = data, err => console.error(err), () => {});
     const p1 = new Product();
     p1.id = 1;
-    p1.name = 'Laptop';
+    p1.name = 'Laptop1';
     p1.brand = brands.find(b => b.name === 'Lenovo');
     this.products.push(p1);
 
     const p2 = new Product();
     p2.id = 2;
-    p2.name = 'Laptop';
+    p2.name = 'Laptop2';
     p2.brand = brands.find(b => b.name === 'Dell');
     p2.likeCount = 1;
     this.products.push(p2);
@@ -41,6 +41,7 @@ export class ProductService {
     return of(this.products);
   }
   getProduct(id: number): Observable<Product> {
+    this.getProducts().subscribe();
     if (this.products) {
       return of(this.products.find(f => f.id === id));
     } else {

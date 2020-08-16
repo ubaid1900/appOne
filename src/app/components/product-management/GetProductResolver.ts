@@ -8,6 +8,8 @@ export class GetProductResolver implements Resolve<Product> {
     constructor(private productService: ProductService) { }
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Product | import("rxjs").Observable<Product> | Promise<Product> {
         const id = +route.paramMap.get('id');
-        return this.productService.getProduct(id);
+        const pr = this.productService.getProduct(id);
+        console.log(`this id is: ${id}. the product is: ${pr}`);
+        return pr;
     }
 }
