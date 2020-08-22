@@ -1,18 +1,21 @@
 <form [formGroup]="productFormGroup" (ngSubmit)="submitTheForm()">
     <label for="productName">Name</label>
     <input autocomplete="off" type="text" id="productName"
-        minlength="3" maxlength="10" formControlName="nameControl" >
-    <span style="color:red;">product name is invalid</span>
+        minlength="3" maxlength="10" formControlName="name" >
+    <span *ngIf="productFormGroup.get('name').errors" style="color:red;">product name is invalid</span>
     <br>
     <label for="brandDD">Brand</label>
-    <select id="productBrandDD" formControlName="brandControl">
+    <select id="productBrandDD" formControlName="brand">
         <option *ngFor="let brand of brands$ | async">{{brand.name}}</option>
     </select>
-    <span style="color:red;">product name is invalid</span>
+    <span *ngIf="productFormGroup.get('brand').errors" style="color:red;">product name is invalid</span>
     <br>
     <label for="productFragile">Fragile</label>
-    <input type="checkbox" id="productFragile" formControlName="fragileControl" />
+    <input type="checkbox" id="productFragile" formControlName="fragile" />
     <br>
-    <input type="submit" value="Submit" disabled="productFormGroup.invalid"  />
-    {{productFormGroup.get('nameControl').errors}}
+    <!-- <input type="submit" value="Submit" disabled="productFormGroup.invalid"  /> -->
+    <input type="submit" value="Submit" />
+    {{productFormGroup.errors}}
 </form>
+
+<div style="color: green;">{{message}}</div>

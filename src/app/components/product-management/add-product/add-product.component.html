@@ -17,3 +17,23 @@
 </form>
 
 {{message}}
+<br>
+<br>
+<br>
+
+<form [formGroup]="addProductForm" (ngSubmit)="submitTheFormRF()">
+    <label for="productName">Name</label>
+    <input autocomplete="off" type="text" name="productName" id="productName">
+    <span style="color:red;" [hidden]="productName.pristine || productName.valid">product name is invalid</span>
+    <br>
+    <label for="brandDD">Brand</label>
+    <select name="productBrandDD" id="productBrandDD">
+        <option *ngFor="let brand of brands$ | async">{{brand.name}}</option>
+    </select>
+    <span style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product brand is invalid</span>
+    <br>
+    <label for="productFragile">Fragile</label>
+    <input type="checkbox" name="productFragile" id="productFragile" />
+    <br>
+    <input type="submit" [disabled]="addProductForm.invalid" value="Submit" />
+</form>

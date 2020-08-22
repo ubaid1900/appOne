@@ -30,17 +30,33 @@ export class EditProductComponent implements OnInit {
     this.product = this.route.snapshot.data['retrievedProduct'];
 
     this.productFormGroup = this.fb.group({
-      nameControl: [{value: this.product.name, disabled: false}, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      brandControl: [{value: this.product.brand, disabled: false }, [Validators.required]],
-      fragileControl: [{value: this.product.brand, disabled: false }]
+      name: [{ value: this.product.name, disabled: false }, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      brand: [{ value: this.product.brand, disabled: false }, [Validators.required]],
+      fragile: [{ value: this.product.fragile, disabled: false }]
     });
+
+    this.productFormGroup.patchValue({name: 'test', brand: this.product.brand});
 
     console.log(this.product);
   }
 
   submitTheForm() {
-    this.productService.addProduct(this.product);
-    this.message = "The product was added.";
+    console.log(this.product);
+    console.log(this.productFormGroup.value);
+
+    // this.product.name = this.productFormGroup.get('name').value;
+    // this.product.brand = this.productFormGroup.get('brand').value;
+    // this.product.fragile = this.productFormGroup.get('fragile').value;
+
+    const id = this.product.id;
+    this.product = this.productFormGroup.value;
+    this.product.id = id;
+    console.log(this.product);
+    console.log(this.productFormGroup.value);
+
+    this.productService.updateProduct(this.product);
+    this.message = "The product was updated.";
+
   }
 
 }

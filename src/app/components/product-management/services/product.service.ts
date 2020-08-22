@@ -18,13 +18,21 @@ export class ProductService {
     product.id = newid;
     this.products.push(product);
   }
-  
+  updateProduct(product: Product): string {
+    let p: Product = this.products.find(f => f.id === product.id);
+    p.brand = product.brand;
+    p.name = product.name;
+    p.fragile = product.fragile;
+
+    return "Updated.";
+  }
+
   getProducts(): Observable<Product[]> {
     if (this.products.length > 0) {
       return of(this.products);
     }
     let brands = [];
-    this.getBrands().subscribe(data => brands = data, err => console.error(err), () => {});
+    this.getBrands().subscribe(data => brands = data, err => console.error(err), () => { });
     const p1 = new Product();
     p1.id = 1;
     p1.name = 'Laptop1';
