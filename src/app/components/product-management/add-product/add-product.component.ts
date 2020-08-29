@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { Product, Brand } from 'src/app/models/product';
 import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs';
 import { ICanDeactivate } from 'src/app/shared/can-deactivate.guard';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-add-product',
@@ -12,6 +12,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 })
 export class AddProductComponent implements OnInit, ICanDeactivate {
   @ViewChild('productForm') productForm: any;
+  @ViewChildren('forTag') tagsTD: any;
   product: Product;
   productRF: Product;
   message: string;
@@ -34,22 +35,44 @@ export class AddProductComponent implements OnInit, ICanDeactivate {
     this.brands$ = this.productService.getBrands();
 
     this.addProductForm = this.formBuilder.group({
-      name: [{}, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
-      brand: [{}, [Validators.required]],
-      fragile: [{}]
+      name: [{ value: 'dd', disabled: false }, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      brand: [null, [Validators.required]],
+      fragile: [],
+      tags: this.formBuilder.array([this.formBuilder.control('init', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])])
     });
   }
+
+  public get tags(): FormArray {
+    return this.addProductForm.get('tags') as FormArray;
+  }
+
+  addTag() {
+    this.tags.push(this.formBuilder.control('new', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]))
+    console.log(this.addProductForm.value);
+    console.log(this.tags.value);
+    console.log(this.tags.status);
+  }
+  tagArray = ['init'];
+  addTagTD() {
+    this.tagArray.push('new');
+    console.log(this.productForm);
+    console.log(this.tagsTD);
+    
+  }
+
 
   submitTheFormRF() {
     this.productRF = new Product();
     this.productRF.name = this.addProductForm.get('name').value;
     this.productRF.brand = this.addProductForm.get('brand').value;
     this.productRF.fragile = this.addProductForm.get('fragile').value;
-    
+
     console.log(this.productRF);
-    
+
     this.productService.addProduct(this.productRF);
     this.message = "The product was added.";
+
+
   }
   submitTheForm() {
     this.productService.addProduct(this.product);

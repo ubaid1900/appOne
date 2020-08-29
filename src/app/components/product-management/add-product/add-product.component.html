@@ -13,6 +13,13 @@
     <label for="productFragile">Fragile</label>
     <input type="checkbox" name="productFragile" id="productFragile" [(ngModel)]="product.fragile" #productFragile="ngModel" />
     <br>
+    <div>
+        <h3>Product Tags</h3>
+        <button type="button" (click)="addTagTD()">Add Tag</button> <br/>
+        <div *ngFor="let tag of tagArray; let i=index; let odd=odd; let evenIndex=even;">
+            <input #forTag type="text" [value]="tag" required minlength="3" maxlength="10" >
+        </div>
+    </div>
     <input type="submit" [disabled]="productForm.invalid" value="Submit" />
 </form>
 
@@ -23,17 +30,25 @@
 
 <form [formGroup]="addProductForm" (ngSubmit)="submitTheFormRF()">
     <label for="productName">Name</label>
-    <input autocomplete="off" type="text" name="productName" id="productName">
+    <input autocomplete="off" type="text" name="productName" id="productName" formControlName="name">
     <span style="color:red;" [hidden]="productName.pristine || productName.valid">product name is invalid</span>
     <br>
     <label for="brandDD">Brand</label>
-    <select name="productBrandDD" id="productBrandDD">
+    <select name="productBrandDD" id="productBrandDD" formControlName="brand">
         <option *ngFor="let brand of brands$ | async">{{brand.name}}</option>
     </select>
     <span style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product brand is invalid</span>
     <br>
     <label for="productFragile">Fragile</label>
-    <input type="checkbox" name="productFragile" id="productFragile" />
+    <input type="checkbox" name="productFragile" id="productFragile" formControlName="fragile" />
     <br>
+    <div formArrayName="tags">
+        <h3>Product Tags</h3>
+        <button type="button" (click)="addTag()">Add Tag</button> <br/>
+        <div *ngFor="let tag of tags.controls; let i=index; let odd=odd; let evenIndex=even;">
+            <input type="text" [formControlName]="i">
+        </div>
+    </div>
     <input type="submit" [disabled]="addProductForm.invalid" value="Submit" />
+    
 </form>
