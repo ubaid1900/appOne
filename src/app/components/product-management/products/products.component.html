@@ -3,6 +3,6 @@
 <app-product *ngFor="let prod of products$ | async" [product]="prod" (likeCountChanged)="handleLikeCountChanged()">
 </app-product> -->
 
-<a routerLink="add">Add product</a>
+<a routerLink="add" appHoverHiglight>Add product</a>
 
 <input type="button" value="Add default product" (click)="addDefaultProduct()">

@@ -1,14 +1,15 @@
 <form #productForm="ngForm" (ngSubmit)="submitTheForm()">
     <label for="productName">Name</label>
     <input autocomplete="off" #productName="ngModel" type="text" name="productName" id="productName" required
-        minlength="3" maxlength="10" [(ngModel)]="product.name">
-    <span style="color:red;" [hidden]="productName.pristine || productName.valid">product name is invalid</span>
+        minlength="3" maxlength="10" [(ngModel)]="product.name" appNoSpace>
+    <div style="color:red;" [hidden]="!productName.errors?.required">product name is required</div>
+    <div style="color:red;" [hidden]="!productName.errors?.minlength">product name is less than 3 characters long</div>
     <br>
     <label for="brandDD">Brand</label>
     <select name="productBrandDD" id="productBrandDD" [(ngModel)]="product.brand" #productBrand="ngModel" required>
         <option *ngFor="let brand of brands$ | async">{{brand.name}}</option>
     </select>
-    <span style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product brand is invalid</span>
+    <div style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product brand is invalid</div>
     <br>
     <label for="productFragile">Fragile</label>
     <input type="checkbox" name="productFragile" id="productFragile" [(ngModel)]="product.fragile" #productFragile="ngModel" />
@@ -31,13 +32,15 @@
 <form [formGroup]="addProductForm" (ngSubmit)="submitTheFormRF()">
     <label for="productName">Name</label>
     <input autocomplete="off" type="text" name="productName" id="productName" formControlName="name">
-    <span style="color:red;" [hidden]="productName.pristine || productName.valid">product name is invalid</span>
+    <div style="color:red;" [hidden]="!name.errors?.required">product name is required</div>
+    <div style="color:red;" [hidden]="!name.errors?.minlength">product name is less than 3 characters long</div>
+    <div style="color:red;" [hidden]="!name.errors?.somekey">product name cannot be just spaces</div>
     <br>
     <label for="brandDD">Brand</label>
     <select name="productBrandDD" id="productBrandDD" formControlName="brand">
         <option *ngFor="let brand of brands$ | async">{{brand.name}}</option>
     </select>
-    <span style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product brand is invalid</span>
+    <div style="color:red;" [hidden]="productBrand.pristine || productBrand.valid">product brand is invalid</div>
     <br>
     <label for="productFragile">Fragile</label>
     <input type="checkbox" name="productFragile" id="productFragile" formControlName="fragile" />

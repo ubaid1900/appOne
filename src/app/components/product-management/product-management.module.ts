@@ -36,7 +36,7 @@ import { GetProductResolver } from './GetProductResolver';
     ])
   ],
   providers: [GetProductResolver],
-  exports: [ProductsComponent]
+  exports: []
 })
 export class ProductManagementModule { }
 

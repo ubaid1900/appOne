@@ -7,12 +7,18 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 // import { ProductManagementModule } from './components/product-management/product-management.module';
 // import { ProductsComponent } from './components/productManagement/products/products.component';
 import { HomeComponent } from './components/home/home.component';
+import { MixedCasePipe } from './shared/mixed-case.pipe';
+import { HoverHiglightDirective } from './shared/hover-higlight.directive';
+import { NoSpaceDirective } from './shared/no-space.directive';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    HomeComponent
+    HomeComponent,
+    MixedCasePipe,
+    HoverHiglightDirective,
+    NoSpaceDirective
   ],
   imports: [
     RouterModule.forRoot([
@@ -26,7 +32,7 @@ import { HomeComponent } from './components/home/home.component';
     // ,
     // ProductManagementModule
   ],
-  providers: [Title],
+  providers: [Title, MixedCasePipe, HoverHiglightDirective],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

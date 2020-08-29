@@ -37,6 +37,8 @@ export class ProductService {
     p1.id = 1;
     p1.name = 'Laptop1';
     p1.brand = brands.find(b => b.name === 'Lenovo');
+    p1.price = 199;
+    p1.sellBy = new Date();
     this.products.push(p1);
 
     const p2 = new Product();
@@ -44,6 +46,8 @@ export class ProductService {
     p2.name = 'Laptop2';
     p2.brand = brands.find(b => b.name === 'Dell');
     p2.likeCount = 1;
+    p2.price = 199;
+    p2.sellBy = new Date('30-DEC-2020');
     this.products.push(p2);
 
     return of(this.products);

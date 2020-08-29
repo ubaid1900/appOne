@@ -3,7 +3,7 @@ import { Product, Brand } from 'src/app/models/product';
 import { ProductService } from '../services/product.service';
 import { Observable } from 'rxjs';
 import { ICanDeactivate } from 'src/app/shared/can-deactivate.guard';
-import { FormBuilder, Validators, FormGroup, FormArray, FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormArray, FormControl, AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 @Component({
   selector: 'app-add-product',
@@ -27,7 +27,7 @@ export class AddProductComponent implements OnInit, ICanDeactivate {
     }
     return true;
   }
-
+  
   ngOnInit(): void {
     // this.product = { id: 0, name: '', brand: null, likeCount: 0 };
     this.product = new Product();
@@ -35,7 +35,7 @@ export class AddProductComponent implements OnInit, ICanDeactivate {
     this.brands$ = this.productService.getBrands();
 
     this.addProductForm = this.formBuilder.group({
-      name: [{ value: 'dd', disabled: false }, [Validators.required, Validators.minLength(3), Validators.maxLength(10)]],
+      name: [{ value: 'dd', disabled: false }, [Validators.required, Validators.minLength(3), Validators.maxLength(10), noSpaces2(3)]],
       brand: [null, [Validators.required]],
       fragile: [],
       tags: this.formBuilder.array([this.formBuilder.control('init', [Validators.required, Validators.minLength(3), Validators.maxLength(10)])])
@@ -45,6 +45,10 @@ export class AddProductComponent implements OnInit, ICanDeactivate {
   public get tags(): FormArray {
     return this.addProductForm.get('tags') as FormArray;
   }
+
+  public get name(): FormControl {
+    return this.addProductForm.get('name') as FormControl;
+  }  
 
   addTag() {
     this.tags.push(this.formBuilder.control('new', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]))
@@ -78,4 +82,27 @@ export class AddProductComponent implements OnInit, ICanDeactivate {
     this.productService.addProduct(this.product);
     this.message = "The product was added.";
   }
+}
+
+export function noSpaces(control: AbstractControl) : ValidationErrors | null {
+  const spacesRegex = `^\\s{${3},}$`;
+  const regex = new RegExp(spacesRegex);
+  const isJustSpaces = regex.test(control.value);
+  
+  if (isJustSpaces) {
+    return {somekey: true};
+  }
+  return null;
+}
+
+export function noSpaces2(num: number): ValidatorFn {
+  return (c: FormControl): ValidationErrors | null => {
+    const spacesRegex = `^\\s{${num},}$`;
+    const regex = new RegExp(spacesRegex);
+    const isJustSpaces = regex.test(c.value);
+    if (isJustSpaces) {
+      return {somekey: true};
+    }
+    return null;
+  };
 }
