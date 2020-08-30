@@ -12,6 +12,7 @@ import { AuthenticationGuard } from 'src/app/shared/auth.guard';
 import { AuthorizationGuardGuard } from 'src/app/shared/authorization-guard.guard';
 import { CanDeactivateGuard } from 'src/app/shared/can-deactivate.guard';
 import { GetProductResolver } from './GetProductResolver';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 
@@ -19,6 +20,7 @@ import { GetProductResolver } from './GetProductResolver';
   declarations: [ProductsComponent, ProductComponent, AddProductComponent, EditProductComponent],
   imports: [
     CommonModule,
+    SharedModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
