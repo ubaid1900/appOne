@@ -6,7 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class MixedCasePipe implements PipeTransform {
 
   transform(value: string, ...args: string[]): string {
-    // return 'xyz';
+    console.log(args);
+    
     const v = [...value];
     // tslint:disable-next-line:prefer-for-of
     for (let i = 0; i < value.length; i++) {

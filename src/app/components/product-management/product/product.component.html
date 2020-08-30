@@ -1,9 +1,9 @@
 <!-- <td>{{product.id}}</td> -->
 <div>{{product.name | uppercase}}</div>
-<div>{{product.brand?.name | mixedCase}} </div>
+<div>{{product.brand?.name | mixedCase : 'some input for the pipe'}} </div>
 <div>{{product.fragile}} </div>
 <div>{{product.price | currency}} </div>
-<div>{{product.sellBy | date}} </div>
+<div>{{product.sellBy | date: 'dd/MM/yyyy'}} </div>
 <div (click)="handleLikeClicked()">{{product.likeCount}}<span>&nbsp;&nbsp;click to like</span></div>
 <a href='products/edit/{{product.id}}' >Edit</a>
 <hr/>

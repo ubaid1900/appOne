@@ -1,9 +1,10 @@
 <form #productForm="ngForm" (ngSubmit)="submitTheForm()">
     <label for="productName">Name</label>
     <input autocomplete="off" #productName="ngModel" type="text" name="productName" id="productName" required
-        minlength="3" maxlength="10" [(ngModel)]="product.name" appNoSpace>
+        minlength="3" maxlength="10" [(ngModel)]="product.name" appNoSpace="3">
     <div style="color:red;" [hidden]="!productName.errors?.required">product name is required</div>
     <div style="color:red;" [hidden]="!productName.errors?.minlength">product name is less than 3 characters long</div>
+    <div style="color:red;" [hidden]="!productName.errors?.somekey">product name cannot be just spaces</div>
     <br>
     <label for="brandDD">Brand</label>
     <select name="productBrandDD" id="productBrandDD" [(ngModel)]="product.brand" #productBrand="ngModel" required>
