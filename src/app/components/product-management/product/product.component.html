@@ -5,5 +5,5 @@
 <div>{{product.price | currency}} </div>
 <div>{{product.sellBy | date: 'dd/MM/yyyy'}} </div>
 <div (click)="handleLikeClicked()">{{product.likeCount}}<span>&nbsp;&nbsp;click to like</span></div>
-<a href='products/edit/{{product.id}}' >Edit</a>
+<a routerLink='edit/{{product.id}}' >Edit</a>
 <hr/>
