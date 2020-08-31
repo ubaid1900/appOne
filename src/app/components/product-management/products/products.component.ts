@@ -34,10 +34,17 @@ export class ProductsComponent implements OnInit, OnDestroy {
 
   addDefaultProduct() {
     const product = new Product();
-    product.name = "Fourth";
-    // product.brand = "Dell";
-    this.productService.addProduct(product);
-    this.message = "The product was added.";
+    this.productService.getBrands().subscribe(
+      (data) => {
+        product.name = "Default";
+        product.brand = data[0];
+        // product.brand = "Dell";
+        product.price = 1;
+        product.sellBy = new Date('3-Apr-2022');
+        this.productService.addProduct(product);
+        this.message = "The product was added.";
+      }
+    );
   }
 }
 
