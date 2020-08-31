@@ -14,7 +14,7 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   addProduct(product: Product) {
-    const newid = this.products.sort((a, b) => b.id - a.id)[0] + 1;
+    const newid = this.products.sort((a, b) => b.id - a.id)[0].id + 1;
     product.id = newid;
     this.products.push(product);
   }
