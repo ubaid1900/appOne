@@ -35,7 +35,7 @@ export class EditProductComponent implements OnInit {
       fragile: [{ value: this.product.fragile, disabled: false }]
     });
 
-    this.productFormGroup.patchValue({name: 'test', brand: this.product.brand});
+    // this.productFormGroup.patchValue({name: 'test', brand: this.product.brand});
 
     console.log(this.product);
   }
